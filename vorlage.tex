@@ -1,0 +1,33 @@
+
+\input{tex/texPreamble.tex}
+
+\def \AuthorA          	{Douglas Adams}
+\def \EmailA           	{douglas.adams@gibb.ch}
+\def \AuthorB        	{Donald Duck}
+\def \EmailB         	{donald.duck@entenhausen.ch}
+\def \modultitel       	{Eine Auseinandersetzung mit dem smartlearn Layout}
+\def \modulnummer      	{M6}
+\def \arbeitsblattName 	{AB-xyz-01}
+\date					{\today}
+\def \titel				{\modultitel}
+\def \pdfkeywords		{smartlearn Modul Vorlage Latex}
+
+\hypersetup{                       % erstellt die PDF Eigenschaften
+	pdftitle    = {\modultitel},
+	pdfkeywords = {\pdfkeywords},
+	pdfauthor   = {\AuthorA / \AuthorB}
+}
+
+\begin{document}
+	
+\input{tex/Titelseite/Titelseite}  % 
+
+% \tableofcontents \newpage        % erstellt ein Inhaltsverzeichnis
+
+\input{Kapitel/body}               % in dieser Datei steht der 
+                                   % eigentliche Text welcher zu setzen ist
+
+\input{tex/Appendix/Appendix}      % Falls kein Anhang gewünscht, ist diese Zeile aus zu kommentieren
+
+\end{document}
+

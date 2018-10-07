@@ -1,0 +1,123 @@
+
+
+%acronym -> Abkürzung
+
+%glossary + nomenclatur -> Worterklärungen
+%glossary -> Definitionen von Allgemein bekannten Wörter
+%nomenclatur -> eigene Definitionen oder vom Allgemein abweichende Definitionen von Wörter
+
+% Benutzung innerhalb von tex siehe auch https://en.wikibooks.org/wiki/LaTeX/Glossary
+% \gls{AD} // Abkürzung
+% \Gls{AD}
+% \glspl{AD}
+
+
+%https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing
+
+
+%Befehle für Abkürzungen
+%Eine Abkürzung mit Glossareintrag
+\newacronym{AD}{AD}{Active Directory\protect\glsadd{glos:AD}}
+\newacronym{CD}{CD}{Compact Disc}
+\newacronym{svm}{SVM}{support vector machine}
+\newacronym{BKU}{BKU}{Berufskundlicher Unterricht}
+\newacronym{bwd}{bwd}{Bildungszentrum für Wirtschaft und Dienstleistung}
+\newacronym{bwdIMS}{bwd IMS}{Informatikmittelschule Bern}
+\newacronym{gibb}{gibb}{Gewerblich-Industrielle Berufsschule Bern}
+\newacronym{IMS}{IMS}{Informatikmittelschule}
+\newacronym{ILIAS}{ILIAS}{Integriertes Lern-, Informations- und Arbeitskooperations-System}
+\newacronym{IT}{IT}{Informationstechnik}
+\newacronym{LMS}{LMS}{Learning Management System}
+\newacronym{MS}{MS}{Microsoft}
+\newacronym{LP}{LP}{Lehrperson}
+\newacronym{OdA}{OdA}{Organisationen der Arbeitswelt}
+\newacronym{SOL}{SOL}{Selbstorganisiertes Lernen}
+\newacronym{ICT}{ICT}{information and communications technology}
+\newacronym{BBC}{BBC}{ICT Berufsbildungscenter}
+\newacronym{EHB}{EHB}{Eidgenössisches Hochschulinstitut für Berufsbildung}
+
+%Befehle für Symbole
+
+%AD
+%Allozieren
+%AntwD
+%Anweisungsblock
+%Assoziativ
+%Ausdruck
+%Deklaration
+%Initialisierung
+%Literal
+%promiscuous
+
+\newglossaryentry{glos:AD}{
+	name=Active Directory,
+	description={Active Directory ist in einem Windows 2000/" "Windows
+		Server 2003-Netzwerk der Verzeichnisdienst, der die zentrale
+		Organisation und Verwaltung aller Netzwerkressourcen erlaubt. Es
+		ermöglicht den Benutzern über eine einzige zentrale Anmeldung den
+		Zugriff auf alle Ressourcen und den Administratoren die zentral
+		organisierte Verwaltung, transparent von der Netzwerktopologie und
+		den eingesetzten Netzwerkprotokollen. Das dafür benötigte
+		Betriebssystem ist entweder Windows 2000 Server oder
+		Windows Server 2003, welches auf dem zentralen
+		Domänencontroller installiert wird. Dieser hält alle Daten des
+		Active Directory vor, wie z.B. Benutzernamen und
+		Kennwörter.}
+}
+\newglossaryentry{Allozieren}{
+	name=Allozieren,
+	description={Unter allozieren (die Allokation) versteht man das dynamische belegen von Speicher.}
+}
+\newglossaryentry{glos:AntwD}{
+	name=Antwortdatei, 
+	description={Informationen zum Installieren einer Anwendung oder des Betriebssystems.}
+}
+\newglossaryentry{Anweisungsblock}{
+	name=Anweisungsblock,
+	description={\href{http://de.wikipedia.org/wiki/Java-Syntax}{Wikipedia} \\(engl. Statement Block) Ein Anweisungsblock dient dazu, mehrere Anweisungen zu gruppieren. Dadurch können mehrere Anweisungen wie eine einzelne Anweisung interpretiert werden, was von einigen Sprachkonstrukten vorausgesetzt wird \textendash{} wie etwa von den Kontrollstrukturen.}
+}
+\newglossaryentry{Assoziativ}{
+	name=Assoziativ,
+	description={\href{http://de.wikipedia.org/wiki/Assoziativgesetz}{Wikipedia} \\Das Assoziativgesetz (lat. associare  vereinigen, verbinden, verknüpfen, vernetzen), auf Deutsch Verknüpfungsgesetz oder auch Verbindungsgesetz, ist eine Regel aus der Mathematik. Eine (zweistellige) Verknüpfung ist assoziativ, wenn die Reihenfolge der Ausführung keine Rolle spielt. Anders gesagt: Die Klammerung mehrerer assoziativer Verknüpfungen ist beliebig. Deshalb kann man es anschaulich auch Klammergesetz nennen.\\Neben dem Assoziativgesetz sind Distributivgesetz und Kommutativgesetz von elementarer Bedeutung in der Mathematik.\\}
+}
+\newglossaryentry{Ausdruck}{
+	name=Ausdruck],
+	description={\href{http://de.wikipedia.org/wiki/Java-Syntax}{Wikipedia} \\(engl. Expression) Unter einem Ausdruck wird ein beliebig komplexes Sprachkonstrukt verstanden, dessen Auswertung einen einzigen wohl definierten Wert ergibt. Im einfachsten Fall ist ein Ausdruck eine Konstante, wie z.B. das Schlüsselwort true oder auch eine Zahl (z.B. 1 oder 0x7fff). Komplexere Ausdrücke sind Vergleiche oder Berechnungen mit mehreren Variablen und Konstanten. Innerhalb der Grammatikbeschreibungen wird hier häufig noch nach verschiedenen Arten von Ausdrücken (z.B. numerisch, literal, etc.) unterschieden.}
+}
+\newglossaryentry{Deklaration}{
+	name=deklaration,
+	description={Mit der Deklaration einer Variable wird diese "bekannt" gemacht, aber noch kein Wert zugewiesen. Siehe auch Initialisierung.}
+}
+\newglossaryentry{Initialisierung}{
+	name=Initialisierung,
+	description={Bei der Initialisierung einer Variable wird dieser ein Wert zugewiesen. (sprich Wertezuweisung).}
+}
+\newglossaryentry{Literal}{
+	name=Literal,
+	description={Ein Literal ist ein konstanter Ausdruck. Es gibt verschiedene Typen von Literalen:\\* die Wahrheitswerte true und false\\ integrale Literale für Zahlen, etwa 123\\ Zeichenliterale, etwa 'J' oder 'n'\\ Fliesskommaliterale, etwa 123.456789 oder 9.999E-2\\ Stringliterale für Zeichenketten, wie "Java ist auch eine Insel"\\ null steht für einen besonderen Referenztyp.}
+}
+\newglossaryentry{promiscuous}{
+	name=promiscuos,
+	description={Der promiscuous mode (engl. etwa 'freizügiger Modus') bezeichnet einen bestimmten Empfangsmodus für netzwerktechnische Geräte. In diesem Modus liest das Gerät den gesamten ankommenden Datenverkehr an die in diesen Modus geschaltete Netzwerkschnittstelle mit und gibt die Daten zur Verarbeitung an das Betriebssystem weiter. Bei Wireless LANs werden im promiscuous mode nur die Pakete des Netzwerks (Accesspoints) weitergeleitet, mit dem der Client gerade verbunden ist. Da das Herstellen einer Verbindung mit dem Netzwerk normalerweise mit einer Authentifizierung einher geht, ist der promiscuous mode nicht geeignet, um Pakete eines Netzwerks aufzufangen, zu dem man keinen direkten Zugang hat.}
+}
+
+
+\newglossaryentry{symb:Pi}{
+	name=$\pi$,
+	description={Die Kreiszahl.},
+	sort=symbolpi
+}
+
+\newglossaryentry{symb:Phi}{
+	name=$\varphi$,
+	description={Ein beliebiger Winkel.},
+	sort=symbolphi
+}
+\newglossaryentry{symb:Lambda}{
+	name=$\lambda$,
+	description={Eine beliebige Zahl, mit der der nachfolgende Ausdruck multipliziert wird.},
+	sort=symbollambda
+}
+
+
+

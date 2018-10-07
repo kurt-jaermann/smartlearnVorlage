@@ -1,0 +1,31 @@
+
+
+\renewcommand{\appendixname}{Anhang}      % Naja, eigentlich braucht es
+\renewcommand{\appendixtocname}{Anhang}   % für diese Vorlage lediglich
+\renewcommand{\appendixpagename}{Anhang}  % \appendixpagename
+
+\begin{appendices} %\appendix % ab hier wird neu nummeriert
+	
+\section{Irgendwelche Anhänge}
+
+\blindtext
+\\
+
+% die üblichen verdächtigen....
+\noindent
+\begin{minipage}{\textwidth}
+	
+	\listoffigures     % Abbildungsverzeichnis
+	
+	\listoftables      % Tabellenverzeichnis drucken
+	
+	\printbibliography % Literatur Verzeichnis
+	
+	%Abkürzungen ausgeben
+	\printglossary[title=Abkürzungsverzeichnis,toctitle=Terms and abbreviations, type=\acronymtype]
+	
+\end{minipage}
+
+
+
+\end{appendices}

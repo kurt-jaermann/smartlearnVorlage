@@ -1,0 +1,93 @@
+\documentclass[10pt,a4paper,ngerman]{scrartcl}
+\usepackage[utf8]{inputenc} % Umlaute direkt verwenden
+\usepackage{lmodern}        % verändert die verwendete Schriftart (latin)
+\usepackage[ngerman]{babel} % macht die deutsche übersetzung für datumsangaben, diverse Titel,...
+\usepackage{graphicx}       % ermöglicht das einbinden von Bilder, Grafiken und backgrounds
+\usepackage{eso-pic}        % add picture absolute positions
+\usepackage{caption}        % ermöglicht eine Beschriftung von Grafiken oder Tabellen ohne Gleitumgebung
+\usepackage{blindtext}      % einfügen von automatisch generierten Text, huuu :-) // ähnlich ipsum
+\usepackage{listings}       % Quellcode Umgebung für Pyton, Java, C#, ....
+\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex} % Literaturverzeichnis
+\usepackage[toc,page]{appendix} % mehr und einfachere Gestaltungsmöglichkeiten für den Anhang
+\usepackage{color}          % Farbige Texte
+
+\usepackage{enumitem}       % verkleinert den Zeilenabstand bei Aufzählungen, siehe auch \setlist{noitemsep}
+\setlist{noitemsep}         % siehe \usepackage{enumitem}
+
+% erstellen eines Inhaltsverzeichnises inklusive 
+% Abbildungsverzeichnis und Tabellenverzeichnis und Literatur aber ohne
+% abkürzungsverzeichnis (denn dies muss mit nomencl erledigt werden)
+\usepackage{tocbibind}
+\renewcommand*{\tableofcontents}{
+	\begingroup
+	\tocchapter
+	\tocfile{\contentsname}{toc}
+	\endgroup
+}
+
+
+% ermöglicht klickbare Links zu webseiten und email
+\usepackage[
+			unicode=true,
+			bookmarks=true,
+			bookmarksnumbered=false,
+			bookmarksopen=false,
+			breaklinks=true,
+			pdfborder={0 0 0},
+			%backref=section,
+			urlcolor=blue,
+			colorlinks=true,
+			pdfproducer = {pdfeTeX-0.\the\pdftexversion\pdftexrevision}
+			]
+			{hyperref}			
+
+% Abkürzungen (Nomenclatur) ----------------------------------------------------
+\usepackage[toc]{glossaries}        % Abkürzungen und Worterklärungen
+\makeglossaries                     % generate the glossary
+\input{tex/Nomenklatur/Nomenklatur} % input der vorhandenen Abkürzungen
+% ------------------------------------------------------------------------------
+
+% highliting bei Programm Code innerhalb des gesetzten textes ------------------
+\lstset{literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+% damit die Listings wie in Eclipse (Java) eingefärbt sind
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javablue}{rgb}{0.16,0,1} % Text in ""
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+\definecolor{javabackground}{rgb}{0.9,0.9,0.9} % backgroundcolor
+
+\lstset{
+	language=Java,
+	basicstyle=\ttfamily,
+	basicstyle=\scriptsize,
+	keywordstyle=\color{javapurple}\bfseries,
+	stringstyle=\color{javablue},
+	commentstyle=\color{javagreen},
+	morecomment=[s][\color{javadocblue}]{/**}{*/},
+	showspaces=false,
+	showstringspaces=true,
+	breaklines=false,	
+	frame=none,
+	tabsize=2,
+	backgroundcolor=\color{javabackground},	
+	numberstyle=\tiny\color{black},
+	stepnumber=1, numbersep=0pt,
+	%numbers=left,
+	captionpos=b
+}
+% ------------------------------------------------------------------------------

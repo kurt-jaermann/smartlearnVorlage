@@ -1,0 +1,45 @@
+\begin{titlepage}
+	
+% fummel, fummel mit dem platzieren des smartlearn Logos // oben rechts nur auf der Titelseite
+\AddToShipoutPictureBG*{
+	\AtTextUpperLeft{%
+		\makebox[15cm][r]{% Move over to right so right aligns with right of text block
+			\raisebox{1.5cm}[0pt][0pt]{% Drop down so top aligns with top of text block
+				\includegraphics[width=7cm]{tex/Titelseite/smartlearn}%
+			}%
+		}%
+	}%
+}
+
+% Background // Das Backgroundbild wurde mit gimp auf die gewünschte grösse skaliert 
+% (habe die Grösse von 175 * 244 mit dem Lineal aus der Ausgedruckten Word Vorlage herausgemessen)
+\newcommand\BackgroundPic{%
+	\put(0,0){%
+		\parbox[b][\paperheight]{\paperwidth}{%
+			\vfill
+			\centering
+%			\includegraphics[width=\paperwidth,height=\paperheight, % original zeille
+			\includegraphics[width=175mm,height=\paperheight,
+			keepaspectratio]{tex/Titelseite/farbverlaufTitelseite}%
+			\vfill
+}}}
+
+\AddToShipoutPicture*{\BackgroundPic}
+
+% Titel und Authoren einfügen
+\vspace*{\fill} % damit der weitere Text unten an der Seite kommt
+\noindent
+\begin{minipage}[b]{\textwidth}
+	% bei Fontsize: 1. Parameter Schriftgrösse, 2. Parameter "baseline-skip" = fontsize * 1.2
+	{\fontsize{35}{42} \selectfont \textcolor{white}{\textbf{ 
+				\begin{flushleft}
+					\modultitel 
+				\end{flushleft} 
+	}}}	
+	
+	{\textbf{\href{mailto:\EmailA}{\AuthorA} / \href{mailto:\EmailB}{\AuthorB}}
+}
+\end{minipage}
+
+	
+\end{titlepage}
