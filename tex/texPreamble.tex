@@ -1,19 +1,133 @@
-\documentclass[10pt,a4paper,ngerman]{scrartcl}
-\usepackage[utf8]{inputenc} % Umlaute direkt verwenden
-\usepackage{lmodern}        % verändert die verwendete Schriftart (latin)
-\usepackage[ngerman]{babel} % macht die deutsche übersetzung für datumsangaben, diverse Titel,...
-\usepackage{graphicx}       % ermöglicht das einbinden von Bilder, Grafiken und backgrounds
-\usepackage{eso-pic}        % add picture absolute positions
-\usepackage{caption}        % ermöglicht eine Beschriftung von Grafiken oder Tabellen ohne Gleitumgebung
-\usepackage{blindtext}      % einfügen von automatisch generierten Text, huuu :-) // ähnlich ipsum
-\usepackage{listings}       % Quellcode Umgebung für Pyton, Java, C#, ....
+\documentclass[10pt, a4paper, ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}   % Umlaute direkt verwenden
+\usepackage[T1]{fontenc}      % Schriftkodierung, wichtig!
+% \usepackage{fontspec}       % da pdfLatex verwendet wird darf dieses Paket NICHT verwendet werden
+\usepackage{lmodern}          % verändert die verwendete Schriftart (latin)
+\usepackage[ngerman]{babel}   % macht die deutsche übersetzung für datumsangaben, diverse Titel,...
+\usepackage{graphicx}         % ermöglicht das einbinden von Bilder, Grafiken und backgrounds
+\usepackage{eso-pic}          % add picture absolute positions
+\usepackage{caption}          % ermöglicht eine Beschriftung von Grafiken oder Tabellen ohne Gleitumgebung
+\usepackage{blindtext}        % einfügen von automatisch generierten Text, huuu :-) // ähnlich ipsum
+\usepackage{listings}         % Quellcode Umgebung für Pyton, Java, C#, ....
 \usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex} % Literaturverzeichnis
 \usepackage[toc,page]{appendix} % mehr und einfachere Gestaltungsmöglichkeiten für den Anhang
-\usepackage{color}          % Farbige Texte
+\usepackage{xcolor}           % Farbige Texte
+\usepackage{enumitem}         % verkleinert den Zeilenabstand bei Aufzählungen, siehe auch "noitemsep"
+\setlist{noitemsep}           % siehe \usepackage{enumitem}
+\usepackage{layout}           % bringt voralem den Befehl \layout und etliche Abkürzungen....
 
-\usepackage{enumitem}       % verkleinert den Zeilenabstand bei Aufzählungen, siehe auch \setlist{noitemsep}
-\setlist{noitemsep}         % siehe \usepackage{enumitem}
+\usepackage[tikz]{bclogo}
 
+% Eigene Makros ----------------------------------------------------------------
+
+    % Convertieren zu cm, mm, m, pt, ...
+    \makeatletter
+    %http://groups.google.com/group/comp.text.tex/msg/7e812e5d6e67fcc5
+    \def\convertto#1#2{\strip@pt\dimexpr #2*65536/\number\dimexpr 1#1}
+    \makeatother
+    
+    % benutzung \convertto{mm}{\the\linewidth}
+% ------------------------------------------------------------------------------
+
+% Callouts ---------------------------------------------------------------------
+
+\definecolor{calloutBackground}{rgb}{0.95,0.95,0.95}
+
+\newcommand{\callout}[2]{
+	\vspace{3mm}
+	\begin{addmargin}[-20mm]{0pt}
+		\colorbox{calloutBackground}{
+			\begin{minipage}[t]{17mm}
+				\vspace{-3mm}{\includegraphics[width=1.0cm]{tex/callouts/#1}}
+			\end{minipage}\hfill
+			\begin{minipage}[t]{\dimexpr\textwidth} % 60mm des Bildes + 10mm abstand
+				\colorbox{calloutBackground}{ % lightgray
+					\parbox[t]{\dimexpr\textwidth-3mm}{ #2 }	
+				}
+			\end{minipage}   	
+		}
+	\end{addmargin}	
+	\vspace{3mm}
+}
+
+% ------------------------------------------------------------------------------
+
+% Antwortbereich ---------------------------------------------------------------
+
+\newcommand{\antwortbereich}[1]{
+\begin{Form}
+	\TextField[multiline, name=Notizen,width=\textwidth,  height=#1,borderstyle=D, bordercolor={}, value={}, backgroundcolor={0.95 0.95 0.95}]{}
+\end{Form}
+}
+
+% ------------------------------------------------------------------------------
+
+
+% Seitenränder -----------------------------------------------------------------
+\usepackage{geometry}         % Da das SeitenLayout etwas exotisch ist musste auch der 
+                              % Lösungsansatz exotisch gewählt werden ....
+\newgeometry{top=0cm, bottom=0cm, left=30mm}
+    % Horizontales
+    \setlength{\hoffset}{10mm}       
+    \setlength{\marginparwidth}{20mm}
+    \setlength{\marginparsep}{10mm}       
+    % \setlength{\textwidth}{135mm}
+
+    % Vertikales
+    \setlength{\voffset}{20mm}
+    \setlength{\textheight}{250mm}
+    
+    % Bilder und Tabellen welche über die ganze Bretie gehen erfordern eine Berechnung der Breite 
+    \newcommand{\marginWidthPlusSep}{\dimexpr\marginparsep+\marginparwidth}
+% ------------------------------------------------------------------------------
+
+
+% Kopfzeile --------------------------------------------------------------------
+\usepackage{lastpage}         % für den zugriff auf die Gesamtseitenzahl siehe auch \pageref{LastPage}
+
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+%\clearscrheadfoot
+\ihead{Kopfzeile innen}
+\chead{Kopfzeile Mitte iet-gibb How-To Seite \pagemark/\pageref*{LastPage}}
+\ohead{Kopfzeile aussen}
+
+%\ifoot{Fußzeile innen}
+%\cfoot{Fußzeile Mitte}
+%\ofoot{Fußzeile außen}
+
+% ------------------------------------------------------------------------------
+	
+% Marginalien (Texte in der Linken Spalte) -------------------------------------
+\usepackage{marginnote}       % verbesserte Marginalien (Flatersatz,...)
+\reversemarginpar             % immer auf der linken Seite(da es sich um ein "onesite" Dokument handelt)
+%\leavevmode                  % nicht am Absatz, sondern so exakt dort wo im Tex angegeben als möglich
+% ------------------------------------------------------------------------------
+
+% Schriftarten -----------------------------------------------------------------
+%\usepackage[default]{dosis}         % Schrift font "Dosis" für Überschriften, 
+                                     % habe es nicht hingekriegt dosis zu laden.
+
+                                     % am ähnlichsten scheint "Computer Modern SansSerif"
+                                     % oder Helvetica zu sein
+
+\usepackage[default]{sourcesanspro} % Schrift font "Source Sans Pro", für den Textkörper 
+                                    % // Copyright 2010, 2012, 2014 Adobe Systems Incorporated
+
+\addtokomafont{section}      {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{subsection}   {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{subsubsection}{\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{paragraph}    {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{subparagraph} {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+
+\addtokomafont{section}      {\fontsize{40pt}{48pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{subsection}   {\fontsize{28pt}{34pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{subsubsection}{\fontsize{20pt}{24pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{paragraph}    {\fontsize{14pt}{17pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{subparagraph} {\fontsize{10pt}{12pt}\selectfont} % funzt für die schriftgrösse
+% ------------------------------------------------------------------------------
+
+% Inhaltsverzeichnisse ---------------------------------------------------------
 % erstellen eines Inhaltsverzeichnises inklusive 
 % Abbildungsverzeichnis und Tabellenverzeichnis und Literatur aber ohne
 % abkürzungsverzeichnis (denn dies muss mit nomencl erledigt werden)
@@ -24,9 +138,9 @@
 	\tocfile{\contentsname}{toc}
 	\endgroup
 }
+% ------------------------------------------------------------------------------
 
-
-% ermöglicht klickbare Links zu webseiten und email
+% ermöglicht klickbare Links zu webseiten und email ----------------------------
 \usepackage[
 			unicode=true,
 			bookmarks=true,
@@ -40,6 +154,7 @@
 			pdfproducer = {pdfeTeX-0.\the\pdftexversion\pdftexrevision}
 			]
 			{hyperref}			
+% ------------------------------------------------------------------------------
 
 % Abkürzungen (Nomenclatur) ----------------------------------------------------
 \usepackage[toc]{glossaries}        % Abkürzungen und Worterklärungen
