@@ -15,8 +15,87 @@
 \usepackage{enumitem}         % verkleinert den Zeilenabstand bei Aufzählungen, siehe auch "noitemsep"
 \setlist{noitemsep}           % siehe \usepackage{enumitem}
 \usepackage{layout}           % bringt voralem den Befehl \layout und etliche Abkürzungen....
+\usepackage{lastpage}         % für den zugriff auf die Gesamtseitenzahl siehe auch \pageref{LastPage}
+\usepackage{scrlayer-scrpage} % aktuell? Ja, gehört zu KOMA Skript.... 
 
-\usepackage[tikz]{bclogo}
+% Seitenränder -----------------------------------------------------------------
+\usepackage{geometry}         % Da das SeitenLayout etwas exotisch ist musste auch der 
+                              % Lösungsansatz exotisch gewählt werden ....
+\newgeometry{top=0cm, bottom=0cm, left=30mm}
+    % Horizontales
+    \setlength{\hoffset}{10mm}
+    \setlength{\marginparwidth}{20mm}
+    \setlength{\marginparsep}{10mm}
+    %\setlength{\textwidth}{422pt}
+
+    % Vertikales
+    \setlength{\voffset}{20mm}
+    \setlength{\textheight}{250mm}
+
+% Bilder und Tabellen welche über die ganze Bretie gehen erfordern eine Berechnung der Breite 
+\newcommand{\marginWidthPlusSep}{\dimexpr\marginparsep+\marginparwidth}
+% ------------------------------------------------------------------------------
+
+% Schriftarten -----------------------------------------------------------------
+%\usepackage[default]{dosis}         % Schrift font "Dosis" für Überschriften, 
+                                     % habe es nicht hingekriegt dosis zu laden.
+
+% am ähnlichsten scheint "Computer Modern SansSerif"
+% oder Helvetica zu sein
+
+\usepackage[default]{sourcesanspro} % Schrift font "Source Sans Pro", für den Textkörper 
+                                    % // Copyright 2010, 2012, 2014 Adobe Systems Incorporated
+
+\addtokomafont{section}      {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{subsection}   {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{subsubsection}{\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{paragraph}    {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+\addtokomafont{subparagraph} {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
+
+\addtokomafont{section}      {\fontsize{40pt}{48pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{subsection}   {\fontsize{28pt}{34pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{subsubsection}{\fontsize{20pt}{24pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{paragraph}    {\fontsize{14pt}{17pt}\selectfont} % funzt für die schriftgrösse
+\addtokomafont{subparagraph} {\fontsize{10pt}{12pt}\selectfont} % funzt für die schriftgrösse
+% ------------------------------------------------------------------------------
+
+% Kopfzeile --------------------------------------------------------------------
+%\usepackage{scrpage2}        % obsolet
+%\usepackage{fancyhdr}        % obsolet? Nö, aber gemäss div Foren funzt es mit KOMA nicht gut
+
+\pagestyle{empty}             % unterdrücken der standart Seitennummerierung
+
+\renewcommand{\pnumfont}{\color{lightgray}} % K.A., ansonsten hat \pagemark eine falsche Textfarbe
+
+\DeclareNewLayer[
+textarea,
+foreground,
+contents={
+	\hspace*{-\dimexpr\marginparsep+\marginparwidth+2mm}{ % warum auch immer es diesen mm braucht
+		\raisebox{-5mm}[0mm]{ % warum auch immer es diesen mm braucht
+			%				\fbox{ % debug
+			\parbox{\marginparwidth}{
+				\textcolor{lightgray}{ %lightgray
+					iet-gibb \\ \modulnummer -\arbeitsblattNum \\Seite \pagemark /\pageref*{LastPage}
+				}
+			}
+			%				}
+		}
+	}
+}
+]{Kopfzeile}
+
+\DeclareNewPageStyleByLayers{zangengeburt}{Kopfzeile}
+\pagestyle{zangengeburt}
+%\AddLayersToPageStyle{@empty@}{Kopfzeile}
+%\AddLayersToPageStyle{@everystyle@}{Kopfzeile}
+% ------------------------------------------------------------------------------
+
+% Marginalien (Texte in der Linken Spalte) -------------------------------------
+\usepackage{marginnote}       % verbesserte Marginalien (Flatersatz,...)
+\reversemarginpar             % immer auf der linken Seite(da es sich um ein "onesite" Dokument handelt)
+%\leavevmode                  % nicht am Absatz, sondern so exakt dort wo im Tex angegeben als möglich
+% ------------------------------------------------------------------------------
 
 % Eigene Makros ----------------------------------------------------------------
 
@@ -35,12 +114,12 @@
 
 \newcommand{\callout}[2]{
 	\vspace{3mm}
-	\begin{addmargin}[-20mm]{0pt}
+	\begin{addmargin}[-20mm]{0pt} % alternativ mit \hspace* arbeiten
 		\colorbox{calloutBackground}{
 			\begin{minipage}[t]{17mm}
 				\vspace{-3mm}{\includegraphics[width=1.0cm]{tex/callouts/#1}}
 			\end{minipage}\hfill
-			\begin{minipage}[t]{\dimexpr\textwidth} % 60mm des Bildes + 10mm abstand
+			\begin{minipage}[t]{\dimexpr\textwidth}
 				\colorbox{calloutBackground}{ % lightgray
 					\parbox[t]{\dimexpr\textwidth-3mm}{ #2 }	
 				}
@@ -49,7 +128,6 @@
 	\end{addmargin}	
 	\vspace{3mm}
 }
-
 % ------------------------------------------------------------------------------
 
 % Antwortbereich ---------------------------------------------------------------
@@ -60,71 +138,6 @@
 \end{Form}
 }
 
-% ------------------------------------------------------------------------------
-
-
-% Seitenränder -----------------------------------------------------------------
-\usepackage{geometry}         % Da das SeitenLayout etwas exotisch ist musste auch der 
-                              % Lösungsansatz exotisch gewählt werden ....
-\newgeometry{top=0cm, bottom=0cm, left=30mm}
-    % Horizontales
-    \setlength{\hoffset}{10mm}       
-    \setlength{\marginparwidth}{20mm}
-    \setlength{\marginparsep}{10mm}       
-    % \setlength{\textwidth}{135mm}
-
-    % Vertikales
-    \setlength{\voffset}{20mm}
-    \setlength{\textheight}{250mm}
-    
-    % Bilder und Tabellen welche über die ganze Bretie gehen erfordern eine Berechnung der Breite 
-    \newcommand{\marginWidthPlusSep}{\dimexpr\marginparsep+\marginparwidth}
-% ------------------------------------------------------------------------------
-
-
-% Kopfzeile --------------------------------------------------------------------
-\usepackage{lastpage}         % für den zugriff auf die Gesamtseitenzahl siehe auch \pageref{LastPage}
-
-\usepackage{scrpage2}
-\pagestyle{scrheadings}
-%\clearscrheadfoot
-\ihead{Kopfzeile innen}
-\chead{Kopfzeile Mitte iet-gibb How-To Seite \pagemark/\pageref*{LastPage}}
-\ohead{Kopfzeile aussen}
-
-%\ifoot{Fußzeile innen}
-%\cfoot{Fußzeile Mitte}
-%\ofoot{Fußzeile außen}
-
-% ------------------------------------------------------------------------------
-	
-% Marginalien (Texte in der Linken Spalte) -------------------------------------
-\usepackage{marginnote}       % verbesserte Marginalien (Flatersatz,...)
-\reversemarginpar             % immer auf der linken Seite(da es sich um ein "onesite" Dokument handelt)
-%\leavevmode                  % nicht am Absatz, sondern so exakt dort wo im Tex angegeben als möglich
-% ------------------------------------------------------------------------------
-
-% Schriftarten -----------------------------------------------------------------
-%\usepackage[default]{dosis}         % Schrift font "Dosis" für Überschriften, 
-                                     % habe es nicht hingekriegt dosis zu laden.
-
-                                     % am ähnlichsten scheint "Computer Modern SansSerif"
-                                     % oder Helvetica zu sein
-
-\usepackage[default]{sourcesanspro} % Schrift font "Source Sans Pro", für den Textkörper 
-                                    % // Copyright 2010, 2012, 2014 Adobe Systems Incorporated
-
-\addtokomafont{section}      {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
-\addtokomafont{subsection}   {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
-\addtokomafont{subsubsection}{\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
-\addtokomafont{paragraph}    {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
-\addtokomafont{subparagraph} {\usefont{T1}{cmss}{m}{n}} % siehe Schriften2.pdf
-
-\addtokomafont{section}      {\fontsize{40pt}{48pt}\selectfont} % funzt für die schriftgrösse
-\addtokomafont{subsection}   {\fontsize{28pt}{34pt}\selectfont} % funzt für die schriftgrösse
-\addtokomafont{subsubsection}{\fontsize{20pt}{24pt}\selectfont} % funzt für die schriftgrösse
-\addtokomafont{paragraph}    {\fontsize{14pt}{17pt}\selectfont} % funzt für die schriftgrösse
-\addtokomafont{subparagraph} {\fontsize{10pt}{12pt}\selectfont} % funzt für die schriftgrösse
 % ------------------------------------------------------------------------------
 
 % Inhaltsverzeichnisse ---------------------------------------------------------
@@ -138,6 +151,12 @@
 	\tocfile{\contentsname}{toc}
 	\endgroup
 }
+% ------------------------------------------------------------------------------
+
+% Abkürzungen (Nomenclatur) ----------------------------------------------------
+\usepackage[toc]{glossaries}        % Abkürzungen und Worterklärungen
+\makeglossaries                     % generate the glossary
+\input{tex/Nomenklatur/Nomenklatur} % input der vorhandenen Abkürzungen
 % ------------------------------------------------------------------------------
 
 % ermöglicht klickbare Links zu webseiten und email ----------------------------
@@ -154,12 +173,6 @@
 			pdfproducer = {pdfeTeX-0.\the\pdftexversion\pdftexrevision}
 			]
 			{hyperref}			
-% ------------------------------------------------------------------------------
-
-% Abkürzungen (Nomenclatur) ----------------------------------------------------
-\usepackage[toc]{glossaries}        % Abkürzungen und Worterklärungen
-\makeglossaries                     % generate the glossary
-\input{tex/Nomenklatur/Nomenklatur} % input der vorhandenen Abkürzungen
 % ------------------------------------------------------------------------------
 
 % highliting bei Programm Code innerhalb des gesetzten textes ------------------
